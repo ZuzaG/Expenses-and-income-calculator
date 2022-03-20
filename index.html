@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pl-PL">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./index.css" />
+    <title>Ilę mogę wydać?</title>
+  </head>
+  <body>
+    <div id="wrapper">
+      <div id="logo"><img src="./LOGO.png" alt="Logo" /></div>
+      <div id="summary">
+        <p>Wpisz przychody oraz wydatki aby zobaczyć bilans</p>
+      </div>
+      <div id="table">
+        <!-- PRZYCHODY -->
+        <div id="income">
+          <h1 class="heading">PRZYCHODY</h1>
+          <form id="addIncomeForm">
+            <input
+              name="newIncomeName"
+              class="name"
+              type="text"
+              placeholder="Nazwa przychodu"
+              maxlength="15"
+              onFocus="this.value='';"
+            />
+            <input
+              name="newIncomeSum"
+              class="sum"
+              type="number"
+              placeholder="Kwota"
+              step="0.01"
+              onFocus="this.value='';"
+            />
+            <button>Dodaj</button>
+          </form>
+          <ul id="incomeUl"></ul>
+
+          <div class="incomeTotal">Suma przychodów: 0 zł</div>
+        </div>
+        <!-- WYDATKI -->
+        <div id="expenses">
+          <h1 class="heading">WYDATKI</h1>
+          <form id="addExpensesForm">
+            <input
+              name="newExpenseName"
+              class="name"
+              type="text"
+              placeholder="Nazwa wydatku"
+              maxlength="15"
+              onFocus="this.value='';"
+            />
+            <input
+              name="newExpenceSum"
+              class="sum"
+              type="number"
+              placeholder="Kwota"
+              step="0.01"
+              onFocus="this.value='';"
+            />
+            <button>Dodaj</button>
+          </form>
+          <ul id="expencesUl"></ul>
+
+          <div class="expensesTotal">Suma wydatków: 0 zł</div>
+        </div>
+      </div>
+    </div>
+
+    <script src="js.js"></script>
+  </body>
+</html>
