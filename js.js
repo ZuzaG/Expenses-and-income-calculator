@@ -79,17 +79,18 @@ const deleteIncomeLine = (e) => {
 const editIncomeLine = (event) => {
   for (let i = 0; i < incomeUl.length; i++) {
     if (event.target.classList.value == incomeUl[i].id) {
-      incomeTotal = incomeTotal - incomeUl[i].sum;
+      let tempImputName = incomeUl[i].name;
+      let tempImputSum = incomeUl[i].sum;
       let oldLi = document.getElementById(incomeUl[i].id);
       let newLi = document.createElement("li");
-      newLi.innerHTML =
-        '<form id="addNewIncomeForm"><input class="name" type="text" placeholder="Nazwa przychodu"><input class="sum" type="text" placeholder="Kwota"><button>Dodaj</button></form>';
+      newLi.innerHTML = `<form id="addNewIncomeForm"><input class="nameEdit" type="text" placeholder= ${tempImputName} value= ${tempImputName}><input class="sumEdit" type="text" placeholder= ${tempImputSum} value= ${tempImputSum}><button class="buttonEdit">Dodaj</button></form>`;
       document.getElementById("incomeUl").replaceChild(newLi, oldLi);
 
       document
         .querySelector("#addNewIncomeForm")
         .addEventListener("submit", (e) => {
           e.preventDefault();
+          incomeTotal = incomeTotal - incomeUl[i].sum;
           let newIncome = {
             id: uuidv4(),
             name: e.currentTarget.elements[0].value,
@@ -133,11 +134,12 @@ const deleteExpenseLine = (e) => {
 const editExpenseLine = (event) => {
   for (let i = 0; i < expenseUl.length; i++) {
     if (event.target.classList.value == expenseUl[i].id) {
+      let tempImputNameE = expenseUl[i].name;
+      let tempImputSumE = expenseUl[i].sum;
       expensesTotal = expensesTotal - expenseUl[i].sum;
       let oldLi = document.getElementById(expenseUl[i].id);
       let newLi = document.createElement("li");
-      newLi.innerHTML =
-        '<form id="addNewExpenceForm"><input class="name" type="text" placeholder="Nazwa przychodu"><input class="sum" type="text" placeholder="Kwota"><button>Dodaj</button></form>';
+      newLi.innerHTML = `<form id="addNewExpenceForm"><input class="nameEdit" type="text" placeholder= ${tempImputNameE} value = ${tempImputNameE}><input class="sumEdit" type="text" placeholder= ${tempImputSumE} value= ${tempImputSumE}> <button class="buttonEdit">Dodaj</button></form>`;
       document.getElementById("expencesUl").replaceChild(newLi, oldLi);
 
       document

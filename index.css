@@ -35,28 +35,45 @@ img {
   background-color: #4d4d4d;
   border-radius: 40px;
 }
-.name {
+.name,
+.nameEdit {
+  width: 300px;
   font-size: 20px;
   border: none;
-  width: 300px;
+  border-radius: 10px;
+}
+.name {
+  height: 40px;
+}
+.nameEdit {
   height: 30px;
+}
+.sum,
+.sumEdit {
+  width: 150px;
+  font-size: 20px;
+  border: none;
   border-radius: 10px;
 }
 .sum {
-  font-size: 20px;
-  border: none;
-  width: 150px;
+  height: 40px;
+}
+.sumEdit {
   height: 30px;
-  border-radius: 10px;
 }
 button {
   font-size: 20px;
   background-color: white;
-  height: 35px;
+  height: 43px;
   width: 75px;
   border-radius: 10px;
   cursor: pointer;
   box-shadow: #262626 4px 4px 0 0;
+}
+.buttonEdit,
+#edit,
+#delete {
+  height: 32px;
 }
 button:hover {
   background-color: #f2f2f2;
@@ -93,7 +110,6 @@ ul {
   font-size: 22px;
 }
 li {
-  width: 500px;
   display: flex;
   flex-direction: row;
   line-height: 40px;
