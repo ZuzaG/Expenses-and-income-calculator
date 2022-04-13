@@ -1,10 +1,10 @@
-// funkcje pomocnicze
+// FUNCTIONS - SHORTCUTS
 const qs = (s) => document.querySelector(s);
 
 //MODEL
 function uuidv4() {
   return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, function (c) {
-    var r = (Math.random() * 16) | 0,
+    let r = (Math.random() * 16) | 0,
       v = c == "x" ? r : (r & 0x3) | 0x8;
     return v.toString(16);
   });
@@ -15,8 +15,8 @@ let incomeTotal = 0;
 let expensesTotal = 0;
 let i = 0;
 
-//WIDOK
-// FUNKCJE UNIWERSALNE
+// VIEW
+// UNIVERSAL FUNCTIONS
 const render = (tab, ulID, editFunctionName, deleteFunctionName) => {
   const createDOM = tab
     .map(
@@ -34,8 +34,8 @@ const render = (tab, ulID, editFunctionName, deleteFunctionName) => {
 };
 
 const renderSumOfIncomesAndExpenses = () => {
-  let differenceBetweenIandEP = incomeTotal - expensesTotal;
-  let differenceBetweenIandEM = (incomeTotal - expensesTotal) * -1;
+  let differenceBetweenIandEP = (incomeTotal - expensesTotal).toFixed(2);
+  let differenceBetweenIandEM = ((incomeTotal - expensesTotal) * -1).toFixed(2);
   if (incomeTotal > expensesTotal) {
     qs(
       "#summary"
@@ -52,7 +52,7 @@ const renderSumOfIncomesAndExpenses = () => {
 };
 
 //UPDATE
-// FUNKCJE UNIWERSALNE
+// UNIVERSAL FUNCTIONS
 const addLine = (obj, oldLines) => {
   oldLines.push(obj);
 };
@@ -62,10 +62,11 @@ const deleteIncomeLine = (e) => {
   let buttonId = e.target.classList.value;
   for (let i = 0; i < incomeUl.length; i++) {
     if (buttonId === incomeUl[i].id) {
-      incomeTotal = incomeTotal - incomeUl[i].sum;
+      incomeTotal = (incomeTotal - incomeUl[i].sum).toFixed(2);
       incomeUl.splice(i, 1);
       renderSumOfIncomesAndExpenses();
-      qs(".incomeTotal").innerHTML = "Suma przychodów: " + incomeTotal + " zł";
+      qs(".incomeTotal").innerHTML =
+        "Suma przychodów: " + incomeTotal.toFixed(2) + " zł";
     }
   }
   render(
@@ -83,7 +84,7 @@ const editIncomeLine = (event) => {
       let tempImputSum = incomeUl[i].sum;
       let oldLi = document.getElementById(incomeUl[i].id);
       let newLi = document.createElement("li");
-      newLi.innerHTML = `<form id="addNewIncomeForm"><input class="nameEdit" type="text" placeholder= ${tempImputName} value= ${tempImputName}><input class="sumEdit" type="text" placeholder= ${tempImputSum} value= ${tempImputSum}><button class="buttonEdit">Dodaj</button></form>`;
+      newLi.innerHTML = `<form id="addNewIncomeForm"><input class="nameEdit" type="text" placeholder= ${tempImputName} value= ${tempImputName} required><input class="sumEdit" type="number" min="0.01" step="0.01" placeholder= ${tempImputSum} value= ${tempImputSum} required><button class="buttonEdit">Dodaj</button></form>`;
       document.getElementById("incomeUl").replaceChild(newLi, oldLi);
 
       document
@@ -98,7 +99,7 @@ const editIncomeLine = (event) => {
           };
           incomeTotal = incomeTotal + newIncome.sum;
           qs(".incomeTotal").innerHTML =
-            "Suma przychodów: " + incomeTotal + " zł";
+            "Suma przychodów: " + incomeTotal.toFixed(2) + " zł";
           renderSumOfIncomesAndExpenses();
           incomeUl.splice(i, 1, newIncome);
           render(
@@ -121,7 +122,7 @@ const deleteExpenseLine = (e) => {
       expenseUl.splice(i, 1);
       renderSumOfIncomesAndExpenses();
       qs(".expensesTotal").innerHTML =
-        "Suma wydatków: " + expensesTotal + " zł";
+        "Suma wydatków: " + expensesTotal.toFixed(2) + " zł";
     }
   }
   render(
@@ -139,7 +140,7 @@ const editExpenseLine = (event) => {
       expensesTotal = expensesTotal - expenseUl[i].sum;
       let oldLi = document.getElementById(expenseUl[i].id);
       let newLi = document.createElement("li");
-      newLi.innerHTML = `<form id="addNewExpenceForm"><input class="nameEdit" type="text" placeholder= ${tempImputNameE} value = ${tempImputNameE}><input class="sumEdit" type="text" placeholder= ${tempImputSumE} value= ${tempImputSumE}> <button class="buttonEdit">Dodaj</button></form>`;
+      newLi.innerHTML = `<form id="addNewExpenceForm"><input class="nameEdit" type="text" placeholder= ${tempImputNameE} value = ${tempImputNameE} required><input class="sumEdit" type="number" min="0.01" step="0.01" placeholder= ${tempImputSumE} value= ${tempImputSumE} required> <button class="buttonEdit">Dodaj</button></form>`;
       document.getElementById("expencesUl").replaceChild(newLi, oldLi);
 
       document
@@ -153,7 +154,7 @@ const editExpenseLine = (event) => {
           };
           expensesTotal = expensesTotal + newExpense.sum;
           qs(".expensesTotal").innerHTML =
-            "Suma wydatków: " + expensesTotal + " zł";
+            "Suma wydatków: " + expensesTotal.toFixed(2) + " zł";
           renderSumOfIncomesAndExpenses();
           expenseUl.splice(i, 1, newExpense);
           render(
@@ -166,7 +167,7 @@ const editExpenseLine = (event) => {
     }
   }
 };
-// EVENTY
+// EVENT
 // A. INCOME PART
 document.querySelector("#addIncomeForm").addEventListener("submit", (e) => {
   e.preventDefault();
@@ -179,10 +180,10 @@ document.querySelector("#addIncomeForm").addEventListener("submit", (e) => {
     sum: Number(newIncomeSum.value),
   };
   incomeTotal = incomeTotal + newIncome.sum;
-  qs(".incomeTotal").innerHTML = "Suma przychodów: " + incomeTotal + " zł";
+  qs(".incomeTotal").innerHTML =
+    "Suma przychodów: " + incomeTotal.toFixed(2) + " zł";
 
   addLine(newIncome, incomeUl);
-  console.log(incomeUl);
   renderSumOfIncomesAndExpenses();
   render(
     incomeUl,
@@ -204,7 +205,8 @@ document.querySelector("#addExpensesForm").addEventListener("submit", (e) => {
     sum: Number(newExpenceSum.value),
   };
   expensesTotal = expensesTotal + newExpense.sum;
-  qs(".expensesTotal").innerHTML = "Suma wydatków: " + expensesTotal + " zł";
+  qs(".expensesTotal").innerHTML =
+    "Suma wydatków: " + expensesTotal.toFixed(2) + " zł";
 
   addLine(newExpense, expenseUl);
   renderSumOfIncomesAndExpenses();
@@ -216,7 +218,7 @@ document.querySelector("#addExpensesForm").addEventListener("submit", (e) => {
   );
 });
 
-//Start aplikacji
+// START
 render(
   expenseUl,
   "#expencesUl",

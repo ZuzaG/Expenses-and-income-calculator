@@ -14,7 +14,7 @@
         <p>Wpisz przychody oraz wydatki aby zobaczyć bilans</p>
       </div>
       <div id="table">
-        <!-- PRZYCHODY -->
+        <!-- INCOME PART -->
         <div id="income">
           <h1 class="heading">PRZYCHODY</h1>
           <form id="addIncomeForm">
@@ -25,6 +25,7 @@
               placeholder="Nazwa przychodu"
               maxlength="15"
               onFocus="this.value='';"
+              required
             />
             <input
               name="newIncomeSum"
@@ -32,7 +33,9 @@
               type="number"
               placeholder="Kwota"
               step="0.01"
+              min="0.01"
               onFocus="this.value='';"
+              required
             />
             <button>Dodaj</button>
           </form>
@@ -40,7 +43,7 @@
 
           <div class="incomeTotal">Suma przychodów: 0 zł</div>
         </div>
-        <!-- WYDATKI -->
+        <!-- EXPENCES PART -->
         <div id="expenses">
           <h1 class="heading">WYDATKI</h1>
           <form id="addExpensesForm">
@@ -51,6 +54,7 @@
               placeholder="Nazwa wydatku"
               maxlength="15"
               onFocus="this.value='';"
+              required
             />
             <input
               name="newExpenceSum"
@@ -58,7 +62,9 @@
               type="number"
               placeholder="Kwota"
               step="0.01"
+              min="0.01"
               onFocus="this.value='';"
+              required
             />
             <button>Dodaj</button>
           </form>
